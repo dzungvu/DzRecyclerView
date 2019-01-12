@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.software.thedung.dzrecyclerviewlb.R;
 import com.software.thedung.dzrecyclerviewlb.listeners.InitChildViewListener;
-import com.software.thedung.dzrecyclerviewlb.listeners.InsideItemClickListener;
 import com.software.thedung.dzrecyclerviewlb.listeners.OutsideItemClickListener;
 import com.software.thedung.dzrecyclerviewlb.models.ParentModel;
 
@@ -25,29 +24,17 @@ public class OutsideAdapter extends RecyclerView.Adapter<OutsideAdapter.MyViewHo
     private Context context;
     private ArrayList<ParentModel> listData;
     private OutsideItemClickListener outsideItemClickListener;
-    private int childView;
-    private InitChildViewListener initChildViewListener;
-
-    // For child view
-    private InsideItemClickListener insideItemClickListener;
     private int childLayoutType;
 
-    public OutsideAdapter(Context context, ArrayList<ParentModel> listData, OutsideItemClickListener outsideItemClickListener, int childView, InitChildViewListener initChildViewListener, InsideItemClickListener insideItemClickListener, int childLayoutType) {
+    public OutsideAdapter(Context context, ArrayList<ParentModel> listData, OutsideItemClickListener outsideItemClickListener, int childLayoutType) {
         this.context = context;
         this.listData = listData;
         this.outsideItemClickListener = outsideItemClickListener;
-        this.childView = childView;
-        this.initChildViewListener = initChildViewListener;
-        this.insideItemClickListener = insideItemClickListener;
         this.childLayoutType = childLayoutType;
     }
 
     public void setChildLayoutType(int listLayoutType) {
         this.childLayoutType = listLayoutType;
-    }
-
-    public void setInitChildViewListener(InitChildViewListener initChildViewListener) {
-        this.initChildViewListener = initChildViewListener;
     }
 
     @NonNull
@@ -72,7 +59,7 @@ public class OutsideAdapter extends RecyclerView.Adapter<OutsideAdapter.MyViewHo
 
         private TextView tvTitle;
         private RecyclerView recyclerView;
-        private InsideAdapter adapter;
+        private RecyclerView.Adapter adapter;
         private ArrayList childList;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -82,8 +69,6 @@ public class OutsideAdapter extends RecyclerView.Adapter<OutsideAdapter.MyViewHo
             childList = listData.get(getAdapterPosition()).getListChildData();
 
             try {
-                adapter = new InsideAdapter(initChildViewListener, childView, insideItemClickListener, childList, context);
-
                 LinearLayoutManager layoutManager;
                 if (childLayoutType == VERTICAL) {
                     layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

@@ -65,7 +65,7 @@ public class DzRecyclerview extends RecyclerView implements InitChildViewListene
     }
 
     private void setUpAdapter() {
-        outsideAdapter = new OutsideAdapter(context, listData, this, childView, this, this, OutsideAdapter.HORIZONTAL);
+        outsideAdapter = new OutsideAdapter(context, listData, this, OutsideAdapter.HORIZONTAL);
         rcvParent.setAdapter(outsideAdapter);
     }
 
